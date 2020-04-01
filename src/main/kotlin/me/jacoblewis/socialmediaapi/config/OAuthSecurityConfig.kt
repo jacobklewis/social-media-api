@@ -31,7 +31,8 @@ class OAuthSecurityConfig : ResourceServerConfigurerAdapter() {
             .requestMatcher(object : AntPathRequestMatcherWrapper(
                 "/users/**",
                 "/following",
-                "/posts/**"
+                "/posts/**",
+                "/messages/**"
             ) {
                 override fun precondition(request: HttpServletRequest): Boolean {
                     return true
@@ -41,7 +42,8 @@ class OAuthSecurityConfig : ResourceServerConfigurerAdapter() {
             .requestMatchers(
                 AntPathRequestMatcher("/users/**"),
                 AntPathRequestMatcher("/following"),
-                AntPathRequestMatcher("/posts/**")
+                AntPathRequestMatcher("/posts/**"),
+                AntPathRequestMatcher("/messages/**")
             )
             .authenticated()
     }
