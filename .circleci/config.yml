@@ -42,12 +42,12 @@ jobs:
       # build!
       - run:
           name: Build
-          command: ./gradle clean build -x test
+          command: gradle clean build -x test
       
       # run tests!
       - run:
           name: Test
-          command: ./gradle test
+          command: gradle test
 
 orbs:
   heroku: circleci/heroku@0.0.10
