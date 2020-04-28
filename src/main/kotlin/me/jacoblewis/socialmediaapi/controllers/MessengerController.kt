@@ -83,7 +83,7 @@ class MessengerController {
     ): ResponseEntity<RequestReceipt<ConversationMessageModel>> {
         val currentUserId =
             userRepo.findById(currentUserID).value?.id ?: throw NotFoundException("unable to find current user")
-        val memberIdsSet = memberIds.split(",").map { it.trim() }.toMutableSet()
+        val memberIdsSet = memberIds.split(",").mapNotNull { userRepo.findById(it.trim()).value?.id }.toMutableSet()
         memberIdsSet.add(currentUserId)
         if (memberIdsSet.size < 2) {
             throw BadRequestException("Not enough members. Must have at least 2 members including user requesting conversation creation")
