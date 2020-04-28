@@ -53,13 +53,12 @@ orbs:
   heroku: circleci/heroku@0.0.10
 
 workflows:
-  btd:
-    jobs:
-      - build
-
   heroku_deploy:
     jobs:
-      - heroku/deploy-via-git
+      - build
+      - heroku/deploy-via-git:
+          requires:
+            - build
           filters:
             branches:
               only:
